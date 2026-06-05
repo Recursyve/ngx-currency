@@ -1,3 +1,4 @@
+import { describe, beforeEach, it, expect, vi } from 'vitest';
 import { InputHandler } from './input.handler';
 import { InputService } from './input.service';
 import { createMockHtmlInputElement } from './mock';
@@ -28,7 +29,7 @@ describe('InputHandler', () => {
 
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     inputHandler.onModelChange = () => {};
-    spyOn(inputHandler, 'onModelChange');
+    vi.spyOn(inputHandler, 'onModelChange').mockReturnValue(undefined);
   });
 
   describe('handleInput', () => {
@@ -116,14 +117,14 @@ describe('InputHandler', () => {
       inputService.rawValue = '$$$1,23SU';
       inputElement.selectionStart = 0;
       inputElement.selectionEnd = 9;
-      spyOn(inputHandler, 'clearValue');
+      vi.spyOn(inputHandler, 'clearValue').mockReturnValue(undefined);
 
       const event = {
         keyCode: 8,
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         preventDefault: () => {},
       } as KeyboardEvent;
-      spyOn(event, 'preventDefault');
+      vi.spyOn(event, 'preventDefault').mockReturnValue(undefined);
       inputHandler.handleKeydown(event);
       expect(event.preventDefault).toHaveBeenCalledTimes(1);
       expect(inputHandler.clearValue).toHaveBeenCalledTimes(1);
@@ -135,14 +136,14 @@ describe('InputHandler', () => {
       inputService.rawValue = '$$$1,23SU';
       inputElement.selectionStart = 1;
       inputElement.selectionEnd = 8;
-      spyOn(inputHandler, 'clearValue');
+      vi.spyOn(inputHandler, 'clearValue').mockReturnValue(undefined);
 
       const event = {
         keyCode: 46,
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         preventDefault: () => {},
       } as KeyboardEvent;
-      spyOn(event, 'preventDefault');
+      vi.spyOn(event, 'preventDefault').mockReturnValue(undefined);
       inputHandler.handleKeydown(event);
       expect(event.preventDefault).toHaveBeenCalledTimes(1);
       expect(inputHandler.clearValue).toHaveBeenCalledTimes(1);
@@ -154,14 +155,14 @@ describe('InputHandler', () => {
       inputService.rawValue = '$$$1,23SU';
       inputElement.selectionStart = 3;
       inputElement.selectionEnd = 7;
-      spyOn(inputHandler, 'clearValue');
+      vi.spyOn(inputHandler, 'clearValue').mockReturnValue(undefined);
 
       const event = {
         keyCode: 63272,
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         preventDefault: () => {},
       } as KeyboardEvent;
-      spyOn(event, 'preventDefault');
+      vi.spyOn(event, 'preventDefault').mockReturnValue(undefined);
 
       inputHandler.handleKeydown(event);
       expect(event.preventDefault).toHaveBeenCalledTimes(1);
@@ -174,14 +175,14 @@ describe('InputHandler', () => {
       inputService.rawValue = '$$$1,23SU';
       inputElement.selectionStart = 3;
       inputElement.selectionEnd = 4;
-      spyOn(inputService, 'removeNumber');
+      vi.spyOn(inputService, 'removeNumber').mockReturnValue(undefined);
 
       const event = {
         keyCode: 46,
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         preventDefault: () => {},
       } as KeyboardEvent;
-      spyOn(event, 'preventDefault');
+      vi.spyOn(event, 'preventDefault').mockReturnValue(undefined);
 
       inputHandler.handleKeydown(event);
       expect(event.preventDefault).toHaveBeenCalledTimes(1);
@@ -195,14 +196,14 @@ describe('InputHandler', () => {
       inputService.rawValue = '$$$1,23SU';
       inputElement.selectionStart = 5;
       inputElement.selectionEnd = 5;
-      spyOn(inputService, 'removeNumber');
+      vi.spyOn(inputService, 'removeNumber').mockReturnValue(undefined);
 
       const event = {
         keyCode: 8,
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         preventDefault: () => {},
       } as KeyboardEvent;
-      spyOn(event, 'preventDefault');
+      vi.spyOn(event, 'preventDefault').mockReturnValue(undefined);
 
       inputHandler.handleKeydown(event);
       expect(event.preventDefault).toHaveBeenCalledTimes(1);
