@@ -1,3 +1,4 @@
+import { describe, beforeEach, it, expect, vi } from 'vitest';
 import { InputService } from './input.service';
 import { createMockHtmlInputElement } from './mock';
 import { NgxCurrencyConfig, NgxCurrencyInputMode } from './ngx-currency.config';
@@ -31,7 +32,7 @@ describe('InputService', () => {
       );
 
       inputService.inputManager.rawValue = '1.234,50';
-      spyOn(inputService, 'updateFieldValue');
+      vi.spyOn(inputService, 'updateFieldValue').mockReturnValue(undefined);
       inputService.removeNumber(46);
       expect(inputService.inputManager.rawValue).toEqual('234,50');
       expect(inputService.updateFieldValue).toHaveBeenCalledWith(0, true);
@@ -47,7 +48,7 @@ describe('InputService', () => {
       );
 
       inputService.inputManager.rawValue = '0.01';
-      spyOn(inputService, 'updateFieldValue');
+      vi.spyOn(inputService, 'updateFieldValue').mockReturnValue(undefined);
       inputService.removeNumber(46);
       expect(inputService.updateFieldValue).toHaveBeenCalledWith(2, true);
     });
@@ -62,7 +63,7 @@ describe('InputService', () => {
       );
 
       inputService.inputManager.rawValue = '1.234,50';
-      spyOn(inputService, 'updateFieldValue');
+      vi.spyOn(inputService, 'updateFieldValue').mockReturnValue(undefined);
       inputService.removeNumber(8);
       expect(inputService.inputManager.rawValue).toEqual('234,50');
       expect(inputService.updateFieldValue).toHaveBeenCalledWith(0, true);
@@ -78,7 +79,7 @@ describe('InputService', () => {
       );
 
       inputService.inputManager.rawValue = '1.234,50';
-      spyOn(inputService, 'updateFieldValue');
+      vi.spyOn(inputService, 'updateFieldValue').mockReturnValue(undefined);
       inputService.removeNumber(8);
       expect(inputService.updateFieldValue).toHaveBeenCalledWith(4, true);
     });
@@ -95,7 +96,7 @@ describe('InputService', () => {
       );
 
       inputService.inputManager.rawValue = '$$1.234,50SUF';
-      spyOn(inputService, 'updateFieldValue');
+      vi.spyOn(inputService, 'updateFieldValue').mockReturnValue(undefined);
       inputService.removeNumber(8);
       expect(inputService.updateFieldValue).not.toHaveBeenCalled();
     });
@@ -112,7 +113,7 @@ describe('InputService', () => {
       );
 
       inputService.inputManager.rawValue = '$$1.234,50SUF';
-      spyOn(inputService, 'updateFieldValue');
+      vi.spyOn(inputService, 'updateFieldValue').mockReturnValue(undefined);
       inputService.removeNumber(46);
       expect(inputService.updateFieldValue).not.toHaveBeenCalled();
     });
